@@ -67,43 +67,7 @@ public class SwerveDriver extends Driver {
         // ps4.povRight().whileTrue(
         //     Component.INTAKE_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.c_forward(true)
         // );
-
-        // climber up
-        ps4.triangle().onTrue(Component.climber.c_gotoUp());
-        // climber down
-        ps4.cross().onTrue(Component.climber.c_gotoDown());
-
-        // long shoot
-        ps4.square().whileTrue(Operator.wrapShootCommand(Component.shooter.c_longShoot()));
-
-        // reverse intake
-        ps4.circle().whileTrue(new ParallelCommandGroup(
-            Component.intake.c_backward(true),
-            Component.indexer.c_backward(true)
-        ));
-        ps4.circle().onTrue(Component.intake.c_extend());
-
-        // indexer
-        // ps4.square().whileTrue(Component.indexer.c_forward(true));
-
-        // intake retract
-        ps4.L1().onTrue(Component.intake.c_retract());
-        // intake extend
-        ps4.L2().onTrue(Component.intake.c_extend());
-        // run intake while any of the above are held
-        ps4.L1().or(ps4.L2()).whileTrue(Component.intake.c_intake());
-
-        // align
-        ps4.R1().whileTrue(ShooterSubsystem.c_smartShootAlign());
-
-        // index and shooter
-        ps4.R2().whileTrue(Operator.c_smartShoot());
-        ps4.R2().whileFalse(
-            new RunIf(
-                Component.shooter.c_smartShoot().withTimeout(0.7),
-                Component.shooter::canShoot
-            )
-        );
+        
     }
 
     @Override

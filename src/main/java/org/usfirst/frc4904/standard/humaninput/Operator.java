@@ -15,24 +15,4 @@ public abstract class Operator extends HumanInput {
         super(name);
     }
 
-    public static final double SHOOT_INDEXER_DELAY = 0.5;
-
-    public static Command wrapShootCommand(Command command) {
-        return new ParallelCommandGroup(
-            command,
-            CmdUtil.delayed(SHOOT_INDEXER_DELAY, new ParallelCommandGroup(
-                Component.indexer.c_forward(true).asProxy(),
-                Component.intake.c_wobble().asProxy()
-            ))
-        );
-    }
-
-    public static Command c_smartShoot() {
-        return new SwitchingIfElseCommand(
-            wrapShootCommand(Component.shooter.c_smartShoot()),
-            null,
-            Component.shooter::canShoot
-        );
-    }
-
 }

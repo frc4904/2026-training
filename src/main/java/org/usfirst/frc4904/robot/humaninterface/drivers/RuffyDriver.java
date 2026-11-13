@@ -28,8 +28,6 @@ public class RuffyDriver extends Driver {
                 .withName("Driver - swerve drive")
         );
 
-        turnJoystick.button1.whileTrue(ShooterSubsystem.c_smartShootAlign());
-
         /// ODOMETRY RESETTING
         xyJoystick.button1.onTrue(
             new AlwaysRunnableInstantCommand(() -> Component.chassis.resetOdometry())

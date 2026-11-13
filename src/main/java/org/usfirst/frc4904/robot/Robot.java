@@ -63,21 +63,6 @@ public class Robot extends CommandRobotBase {
         autonChooser.addOption("straight", Auton.c_jankStraight());
         autonChooser.addOption("reverse", Auton.c_jankReverse());
 
-        // pathplanner sequences
-        autonChooser.addOption("shoot left", Auton.c_shootLeft());
-        autonChooser.addOption("shoot straight", Auton.c_shootStraight());
-        autonChooser.addOption("shoot center left", Auton.c_shootCenterLeft());
-        autonChooser.addOption("shoot right", Auton.c_shootRight());
-        autonChooser.addOption("shoot center right", Auton.c_shootCenterRight());
-        autonChooser.addOption("shoot n' climb left", Auton.c_shootAndClimbLeft());
-        autonChooser.addOption("shoot n' climb center left", Auton.c_shootAndClimbCenterLeft());
-        autonChooser.addOption("direct climb center left", Auton.c_climbCenterLeft());
-        autonChooser.addOption("climb from hell", Auton.c_climbFromHell());
-        autonChooser.addOption("ragebait", Auton.c_ragebait());
-        autonChooser.addOption("intake SOME of the balls", Auton.c_dipthesecond());
-        autonChooser.addOption("climb fixed?", Auton.c_climbFixed());
-
-
         // pathplanner paths
         String[] names = { "STRET", "romtater", "aaahhh", "go", "climbnew" };
         for (var name : names) {
@@ -114,48 +99,11 @@ public class Robot extends CommandRobotBase {
     @Override
     public void teleopInitialize() {
         Component.chassis.stop();
-
-        Component.lights.flashColor(LightSubsystem.Color.TELEOP);
     }
-
-    private static final double shiftFlashDur = 3;
-    private static final int[] shiftDurations = { 10, 25, 25, 25, 25, 30 };
-
-    private static final int[] shiftEndTimes = new int[shiftDurations.length];
-    static {
-        for (int i = 0, acc = 0; i < shiftDurations.length; i++) {
-            shiftEndTimes[i] = acc += shiftDurations[i];
-        }
-    }
-
-    private int getShift(double elapsed) {
-        for (int i = 0; i < shiftEndTimes.length; i++) {
-            if (shiftEndTimes[i] > elapsed) return i;
-        }
-        return -1;
-    }
-
-    private Double flashStartTime;
-    private int lastShift;
 
     @Override
     public void teleopExecute() {
-        if (DriverStation.isFMSAttached() && DriverStation.isEnabled()) {
-            double time = 140 - Timer.getMatchTime();
-            int upcomingShift = getShift(time + shiftFlashDur);
-            if (lastShift != upcomingShift) {
-                if (upcomingShift == getShift(time)) {
-                    Component.lights.flashColor(0, 255, 0);
-                    lastShift = upcomingShift;
-                    flashStartTime = null;
-                } else {
-                    if (flashStartTime == null) flashStartTime = Timer.getFPGATimestamp();
-                    double flashTime = Timer.getFPGATimestamp() - flashStartTime;
-                    int[] color = flashTime % 1 < 0.5 ? new int[] { 255, 255, 255 } : new int[] { 0, 0, 0 };
-                    Component.lights.flashColor(color);
-                }
-            }
-        }
+
     }
 
     @Override
@@ -163,7 +111,6 @@ public class Robot extends CommandRobotBase {
 
     @Override
     public void autonomousInitialize() {
-        Component.lights.flashColor(LightSubsystem.Color.AUTON);
 
         // if we are using absolute pathplanner positioning (see javadoc on constant),
         // then we're probably starting in the right place, so let's zero the pose
@@ -255,7 +202,6 @@ public class Robot extends CommandRobotBase {
             // Mechanisms
 
             Logger.recordOutput("Climber/Encoder", Component.climberEncoder.get());
-            Logger.recordOutput("Intake/Angle", Component.intake.getAngle());
             Logger.recordOutput("Intake/Encoder", Component.intakeEncoder.getAbsolute());
             Logger.recordOutput("Shooter/Current", Component.shooterMotorLeft.getSupplyCurrent().getValueAsDouble());
 

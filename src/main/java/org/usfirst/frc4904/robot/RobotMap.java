@@ -54,6 +54,9 @@ public final class RobotMap {
         public static IntakeSubsystem intake;
         public static ShooterSubsystem shooter;
         public static IndexerSubsystem indexer;
+        
+        public static ExampleSubsystem example;
+
         // https://github.com/facebook/react/blob/74568e8627aa43469b74f2972f427a209639d0b6/fixtures/legacy-jsx-runtimes/react-16/cjs/react-jsx-runtime.development.js#L84
         public static MotorSubsystem INTAKE_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
@@ -75,6 +78,9 @@ public final class RobotMap {
         public static SmartMotorController indexerMotorTop;
         public static CustomTalonFX shooterMotorRight;
         public static CustomTalonFX shooterMotorLeft;
+
+        public static CustomTalonFX exampleMotor1;
+        public static CustomTalonFX exampleMotor2;
 
         // misc
         public static IMU imu;
@@ -166,20 +172,6 @@ public final class RobotMap {
             )
         );
 
-        // Component.vision = new VisionSubsystem(
-        //     new Transform2d(Units.inchesToMeters(8), Units.inchesToMeters(0), Rotation2d.kZero)
-        // );
-
-        Component.ledStrip = new AddressableLED(Port.PWM.LED_STRIP);
-        Component.lights = new LightSubsystem(
-            Component.ledStrip,
-            50,
-            new int[] { 25, 25 },
-            new boolean[] { true, false }
-            // new int[] { 19, 11, 20 },
-            // new boolean[] { false, false, true }
-        );
-
         Component.climbMotor = new CustomTalonFX(1, true);
         Component.climberEncoder = new LinearDutyCycleEncoder(8);
 
@@ -193,15 +185,11 @@ public final class RobotMap {
         Component.indexerMotorBottom = new CustomTalonFX(5, true);
         Component.indexerMotorTop = new CustomTalonFX(42, true);
 
-        Component.INTAKE_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = new MotorSubsystem(
-            Component.intakeAngleMotor,
-            2
-        );
+        Component.exampleMotor1 = new CustomTalonFX(62, true);
+        Component.exampleMotor2 = new CustomTalonFX(63, false);
 
-        Component.intake = new IntakeSubsystem(Component.intakeAngleMotor, Component.intakeRollerMotor, Component.intakeEncoder);
-        Component.climber = new ClimberSubsystem(Component.climbMotor, Component.climberEncoder);
-        Component.shooter = new ShooterSubsystem(Component.shooterMotorRight, Component.shooterMotorLeft);
-        Component.indexer = new IndexerSubsystem(Component.indexerMotorTop, Component.indexerMotorBottom);
+
+        Component.example = new ExampleSubsystem(Component.exampleMotor1, Component.exampleMotor2);
 
         if (USE_RUFFY_DRIVER) {
             HumanInput.Driver.xyJoystick = new CustomCommandJoystick(Port.HumanInput.xyJoystick, 0.01);
