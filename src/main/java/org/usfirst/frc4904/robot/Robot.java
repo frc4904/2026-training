@@ -42,7 +42,7 @@ import static org.usfirst.frc4904.robot.RobotMap.USE_RUFFY_DRIVER;
 
 public class Robot extends CommandRobotBase {
 
-    private final boolean ADVANTAGEKIT_LOGS = true;
+    private final boolean ADVANTAGEKIT_LOGS = false;
 
     private static final FieldObject2d
         autonPreview = Dashboard.previewField.getObject("auton_preview"),
@@ -139,7 +139,7 @@ public class Robot extends CommandRobotBase {
 
         CommandScheduler.getInstance().cancelAll();
 
-        Component.lights.flashColor(LightSubsystem.Color.DISABLED);
+        // Component.lights.flashColor(LightSubsystem.Color.DISABLED);
     }
 
     @Override

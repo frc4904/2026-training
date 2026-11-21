@@ -25,7 +25,7 @@ public class DefaultOperator extends Operator {
     public void bindCommands() {
         var joystick = RobotMap.HumanInput.Operator.joystick;
 
-        joystick.button9.whileTrue(Component.example.c_up());
+        // joystick.button9.whileTrue(Component.example.c_up());
 
         joystick.button10.whileTrue(Component.intake.intake_in());
     }
