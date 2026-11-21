@@ -191,6 +191,8 @@ public final class RobotMap {
 
         Component.example = new ExampleSubsystem(Component.exampleMotor1, Component.exampleMotor2);
 
+        Component.intake = new IntakeSubsystem(Component.intakeAngleMotor, Component.intakeRollerMotor);
+
         if (USE_RUFFY_DRIVER) {
             HumanInput.Driver.xyJoystick = new CustomCommandJoystick(Port.HumanInput.xyJoystick, 0.01);
             HumanInput.Driver.turnJoystick = new CustomCommandJoystick(Port.HumanInput.turnJoystick, 0.01);

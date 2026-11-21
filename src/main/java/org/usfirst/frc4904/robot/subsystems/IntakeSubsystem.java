@@ -22,7 +22,6 @@ public class IntakeSubsystem extends SubsystemBase {
     private void setRollerVoltage(double rollerVoltage) {
         rollerMotor.setVoltage(rollerVoltage);
     }
-
     private void setAngleVoltage(double angleVoltage) {
         angleMotor.setVoltage(angleVoltage);
     }
@@ -31,16 +30,14 @@ public class IntakeSubsystem extends SubsystemBase {
     public void rollerStop() {
         rollerMotor.stopMotor();
     }
-
     public void angleStop() {
-        rollerMotor.stopMotor();
+        angleMotor.stopMotor();
     }
 
 
     public Command intake_in() {
         return startEnd(() -> setRollerVoltage(rollerVoltage), this::rollerStop);
     }
-
     public Command intake_out() {
         return startEnd(() -> setRollerVoltage(-rollerVoltage), this::rollerStop);
     }
@@ -49,7 +46,6 @@ public class IntakeSubsystem extends SubsystemBase {
     public Command intake_up() {
         return startEnd(() -> setAngleVoltage(angleVoltage), this::angleStop);
     }
-
     public Command intake_down() {
         return startEnd(() -> setAngleVoltage(-angleVoltage), this::angleStop);
     }
