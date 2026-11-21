@@ -185,13 +185,13 @@ public final class RobotMap {
         Component.indexerMotorBottom = new CustomTalonFX(5, true);
         Component.indexerMotorTop = new CustomTalonFX(42, true);
 
-        Component.exampleMotor1 = new CustomTalonFX(62, true);
-        Component.exampleMotor2 = new CustomTalonFX(63, false);
+        // Component.exampleMotor1 = new CustomTalonFX(62, true);
+        // Component.exampleMotor2 = new CustomTalonFX(63, false);
 
 
-        Component.example = new ExampleSubsystem(Component.exampleMotor1, Component.exampleMotor2);
+        // Component.example = new ExampleSubsystem(Component.exampleMotor1, Component.exampleMotor2);
 
-        Component.intake = new IntakeSubsystem(Component.intakeAngleMotor, Component.intakeRollerMotor);
+        Component.intake = new IntakeSubsystem(Component.intakeRollerMotor, Component.intakeAngleMotor);
 
         if (USE_RUFFY_DRIVER) {
             HumanInput.Driver.xyJoystick = new CustomCommandJoystick(Port.HumanInput.xyJoystick, 0.01);
