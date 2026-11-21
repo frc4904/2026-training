@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class IntakeSubsystem extends SubsystemBase {
 
     private static final double rollerVoltage = 6;
-    private static final double angleVoltage = 10;
+    private static final double angleVoltage = 2;
 
     private final SmartMotorController rollerMotor, angleMotor;
 

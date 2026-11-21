@@ -28,5 +28,8 @@ public class DefaultOperator extends Operator {
         // joystick.button9.whileTrue(Component.example.c_up());
 
         joystick.button10.whileTrue(Component.intake.intake_in());
+        joystick.button9.whileTrue(Component.intake.intake_out());
+        joystick.button5.whileTrue(Component.intake.intake_up());
+        joystick.button3.whileTrue(Component.intake.intake_down());
     }
 }
